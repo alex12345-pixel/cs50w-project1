@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block title %}Libros{% endblock %}
+
+{% block main %}
+<h2 class="mover">Resultados relacionados con: <i>{{result}}</i></h2>
+<div>
+  <div>
+    <h3>Buscar otro libro</h3>
+    <form action="/search" method = "post" class="d-flex">
+        <input class="form-control me-2" id = "search" list="books" type="search" placeholder="Título, isbn o autor del libro" aria-label="Search" name = "search">
+        <button class="btn btn-outline-success" type="submit">Buscar</button>    
+  </form>
+  <br>
+  <div class="row row-cols-1 row-cols-md-4 g-4">
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          {% for message in messages %}
+            <div class="alert alert-light" role="alert">
+              {{category}} {{ message }}
+            </div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+
+      
+
+  {%for x in books %}
+  <div class="card text-center">
+    <div class="card-header">
+      <h5 class="card-title">{{x.title}}</h5>
+    </div>
+    <div class="card-body">
+      <p class="card-text">Autor: {{x.author}} <br> Año de publicación: {{x.year}} <br> ISBN: {{x.isbn}}</p>
+      <a href="/isbn/{{x.isbn}}" class="btn btn-primary">Más información</a>
+    </div>
+  </div>
+
+  {%endfor%}
+  </div>
+  </div>
+</div>
+{% endblock %}

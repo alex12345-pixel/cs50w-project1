@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block main %}
+
+<div class="container container2">
+    <div class="row tam">
+      <div class="col">
+        <h1 class="mover">Busquedas de libro</h1>
+
+        
+        <form action="/search" method = "post" class="d-flex">
+          <div class="input-group rounded">
+            <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" name = "search" />
+              <button class="btn btn-outline-success" type="submit">Buscar</button>    
+            
+          </div>
+                
+         </form>
+      </div>
+    </div>
+    <div class="row ">
+      <div class="col">
+        <div >
+            <h2 style="color: white;">Libros</h2>
+            <div class="row row-cols-1 row-cols-md-4 g-4">
+                {% for a in books %}
+                <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                    <h5 class="card-title"><b>Título:</b> {{ a.title }}</h5>
+                    <p class="card-text"><b>Autor:</b> {{ a.author }}</p>
+                    <p class="card-text"><b>Fecha de publicación:</b> {{ a.year }}</p>
+                    <a href="/isbn/{{a.isbn}}" class="btn btn-primary">Más información</a>
+                    </div>
+                    <div class="card-footer">
+                    <small class="text-muted">ISBN: {{a.isbn }}</small>
+                    </div>
+                </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

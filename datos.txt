@@ -1,0 +1,5 @@
+
+set FLASK_APP=application.py
+ export DATABASE_URL=postgresql://kqqfgbmzxzkoye:25c789c01e0840750fc8f5564ad0b0cca08135fe2c9b556e0d0150ce8d42227c@localhost:5432/user
+
+"postgresql://kqqfgbmzxzkoye:25c789c01e0840750fc8f5564ad0b0cca08135fe2c9b556e0d0150ce8d42227c@ec2-54-147-36-107.compute-1.amazonaws.com:5432/d7skt5133ds9dl"

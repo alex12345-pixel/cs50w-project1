@@ -1,0 +1,125 @@
+{% extends "layout.html" %}
+
+{% block title %}{{titulo}}{% endblock %}
+
+{% block main %}
+<h3 class="centro">Biblioteca</h3>
+
+
+
+<div class="container-lg">
+  <div class="row ">
+    {% for e in libros %}
+    <div class="wrapper3">
+      <div class="img-logo">
+        <img src="{{imagen}}" class="port">
+      </div>
+      <h3 class="nom"> Titulo: {{ e.title }}</h3>
+      <h2 class="let"> ISBN: {{e.isbn }} </h2>
+
+      <div class="media-info">
+        <h2 class="let"> Author: {{ e.author }} </h2>
+        <h2 class="let"> Año: {{ e.year }} </h2>
+        <h4>Información de google books:</h4>
+        <p><b>Rating:</b> {{rating}}</p>
+        <p><b>Cantidad de votos: </b>{{votes}}</p>
+      </div>
+
+    </div>
+
+
+    <div class="wrapper4">
+      <h4>Sinopsis</h4>
+      <hr>
+      <!--<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat est magni, sapiente nisi soluta aperiam, eius quas iusto vitae dolorum voluptas illo quaerat, similique optio cum autem cumque architecto hic?</p>-->
+      <p>{{description}}</p>
+    </div>
+    <div class="wrapper5">
+      <div>
+        <h4>Reseñas de otras personas</h4>
+        <hr>
+        <div>
+          {%for y in comentarios%}
+          <div class="maru">
+            <div class="card">
+              <div class="card-header">
+                <b> @{{y.username}} </b>
+              </div>
+              <div class="card-body">
+                <blockquote class="blockquote mb-0">
+                  <p>{{y.review}}</p>
+                  <footer class="blockquote-footer"><b>Puntuación:</b>{{y.score}}★</footer>
+                </blockquote>
+              </div>
+            </div>
+          </div>
+          {%endfor%}
+        </div>
+      </div>
+
+      
+
+
+
+      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+      {% for message in messages %}
+      <div class="alert alert-danger d-flex align-items-center" role="alert">
+        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:">
+          <use xlink:href="#exclamation-triangle-fill" />
+        </svg>
+        <div>
+          {{category}} {{ message }}
+        </div>
+      </div>
+      {% endfor %}
+      {% endif %}
+      {% endwith %}
+    </div>
+    <div class="wrapper6">
+
+      <h4>Opinión sobre este libro</h4>
+      <hr>
+      <form action="/reviews" method="POST">
+        <p>Calificacion del libro del 1 al 5: </p>
+
+        <input type="hidden" name="isbn" value="{{e.isbn}}">
+        <input type="hidden" name="book_id" value="{{e.id}}">
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1">
+          <label class="form-check-label" for="inlineRadio1">1</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="2">
+          <label class="form-check-label" for="inlineRadio2">2</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="3">
+          <label class="form-check-label" for="inlineRadio1">3</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="4">
+          <label class="form-check-label" for="inlineRadio2">4</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio5" value="5">
+          <label class="form-check-label" for="inlineRadio2">5</label>
+        </div>
+
+        <div class="mb-2" style="width:90% !important">
+          <label for="exampleFormControlTextarea1" class="form-label">Escribe un comentario</label>
+          <textarea name="comentario" class="form-control" id="exampleFormControlTextarea1" rows="3"
+            required></textarea>
+        </div>
+        {% if creador %}
+        <button type="submit" class="btn btn-primary mb-3">Editar mi reseña</button>
+        {% else %}
+        <button type="submit" class="btn btn-primary mb-3">Enviar</button>
+        {% endif %}
+      </form>
+
+      </div>
+  </div>
+</div>
+{%endfor%}
+{%endblock%}

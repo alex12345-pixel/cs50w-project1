@@ -1,0 +1,78 @@
+{% extends "layout.html" %}
+
+{% block title %}Registrarse{% endblock %}
+
+
+{% block main %}
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+    <path
+      d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+  </symbol>
+  <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+    <path
+      d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z" />
+  </symbol>
+  <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+    <path
+      d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+  </symbol>
+</svg>
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-danger d-flex align-items-center" role="alert">
+  <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:">
+    <use xlink:href="#exclamation-triangle-fill" />
+  </svg>
+  <div>
+    {{category}} {{ message }}
+  </div>
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+<div class="container6">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <h2 class="text-center text-dark mt-5">Register</h2>
+      <div class="card my-5">
+
+        <form class="card-body cardbody-color p-lg-5" action="/register" method="post">
+
+          <div class="text-center">
+            <img src="https://cdn.pixabay.com/photo/2017/08/06/22/01/books-2596809_960_720.jpg" class="img-fluid profile-image-pic img-thumbnail rounded-circle my-3"
+              width="200px" alt="profile">
+          </div>
+
+          <div class="mb-3">
+            <input type="text" class="form-control" id="name" aria-describedby="emailHelp"
+              placeholder="Name" name="name">
+          </div>
+
+          <div class="mb-3">
+            <input type="text" class="form-control" id="Username" aria-describedby="emailHelp"
+              placeholder="User Name" name="username">
+          </div>
+          <div class="mb-3">
+            <input type="password" class="form-control" id="password" placeholder="password" name="password">
+          </div>
+          <div class="mb-3">
+            <input type="password" class="form-control" id="password" placeholder="Confirm password" name="confirm">
+          </div>
+          <div class="text-center"><button type="submit" class="btn btn-color px-5 mb-5 w-100">Register</button></div>
+         
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+{% endblock %}
